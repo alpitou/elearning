@@ -7,6 +7,8 @@ use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\MaterialController;
 use App\Http\Controllers\Api\DiscussionController;
 use App\Http\Controllers\Api\ReplyController;
+use App\Http\Controllers\Api\AssignmentController;
+use App\Http\Controllers\Api\SubmissionController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -45,4 +47,14 @@ Route::middleware('auth:sanctum')->group(function () {
     // REPLY ROUTES
     Route::get('/discussions/{discussionId}/replies', [ReplyController::class, 'index']);
     Route::post('/replies', [ReplyController::class, 'store']);
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    // ASSGINMENT ROUTESD
+    Route::get('/courses/{courseId}/assignments', [AssignmentController::class, 'index']);
+    Route::post('/assignments', [AssignmentController::class, 'store']);
+
+    // SUBMISSION ROUTES
+    Route::post('/submissions', [SubmissionController::class, 'store']);
+    Route::put('/submissions/{id}/grade', [SubmissionController::class, 'grade']);
 });

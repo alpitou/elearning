@@ -16,7 +16,7 @@ return new class extends Migration
         $table->foreignId('assignment_id')->constrained('assignments')->onDelete('cascade');
         $table->foreignId('student_id')->constrained('users')->onDelete('cascade');
         $table->string('file_path');
-        $table->integer('score')->nullable();
+        $table->integer('grade')->nullable();
         $table->timestamps();
         });
     }
