@@ -9,6 +9,8 @@ use App\Http\Controllers\Api\DiscussionController;
 use App\Http\Controllers\Api\ReplyController;
 use App\Http\Controllers\Api\AssignmentController;
 use App\Http\Controllers\Api\SubmissionController;
+use App\Http\Controllers\Api\NotificationController;
+use App\Http\Controllers\Api\DashboardController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -57,4 +59,13 @@ Route::middleware('auth:sanctum')->group(function () {
     // SUBMISSION ROUTES
     Route::post('/submissions', [SubmissionController::class, 'store']);
     Route::put('/submissions/{id}/grade', [SubmissionController::class, 'grade']);
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    // NOTIFICATION ROUTES
+    Route::get('/notifications', [NotificationController::class, 'index']);
+    Route::put('/notifications/{id}/read', [NotificationController::class, 'markAsRead']);
+
+    // DASHBOARD ROUTES
+    Route::get('/dashboard', [DashboardController::class, 'index']);
 });
