@@ -27,7 +27,7 @@ class DashboardController extends Controller
             $summary = [
                 'total_enrolled_courses' => $user->courses()->count(),
                 'total_submissions' => Submission::where('student_id', $user->id)->count(),
-                'average_grade' => Submission::where('student_id', $user->id)->avg('grade'),
+                'average_score' => Submission::where('student_id', $user->id)->avg('score'),
             ];
         }
 

@@ -50,4 +50,43 @@ class MaterialController extends Controller
         $materials = Material::where('course_id', $courseId)->get();
         return response()->json($materials);
     }
+    public function destroy($id)
+    {
+        $material = Material::findOrFail($id);
+        $material->delete();
+
+        return response()->json([
+            'message' => 'Material moved to trash (soft deleted).'
+        ]);
+    }
+
+    public function trash()
+    {
+        $trashed = Material::onlyTrashed()
+            ->with('course:id,name')
+            ->get();
+
+        return response()->json($trashed);
+    }
+
+    public function restore($id)
+    {
+        $material = Material::onlyTrashed()->findOrFail($id);
+        $material->restore();
+
+        return response()->json([
+            'message' => 'Material restored successfully.',
+            'data' => $material
+        ]);
+    }
+
+    public function forceDelete($id)
+    {
+        $material = Material::onlyTrashed()->findOrFail($id);
+        $material->forceDelete();
+
+        return response()->json([
+            'message' => 'Material permanently deleted.'
+        ]);
+    }
 }

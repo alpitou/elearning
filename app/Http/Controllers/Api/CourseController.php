@@ -58,7 +58,9 @@ class CourseController extends Controller
 
         $course->delete();
 
-        return response()->json(['message' => 'Mata kuliah dihapus']);
+        return response()->json([
+            'message' => 'Mata kuliah dipindahkan ke trash (soft deleted).'
+        ]);
     }
 
     public function enroll(Request $request, $id)
@@ -71,5 +73,39 @@ class CourseController extends Controller
         $course->students()->attach($request->user()->id);
 
         return response()->json(['message' => 'Berhasil mendaftar ke mata kuliah']);
+    }
+
+
+    // ✅ Lihat semua course yang sudah dihapus
+    public function trash()
+    {
+        $trashed = Course::onlyTrashed()
+            ->with('lecturer:id,name')
+            ->get();
+
+        return response()->json($trashed);
+    }
+
+    // ✅ Restore course dari trash
+    public function restore($id)
+    {
+        $course = Course::onlyTrashed()->findOrFail($id);
+        $course->restore();
+
+        return response()->json([
+            'message' => 'Course restored successfully.',
+            'data' => $course
+        ]);
+    }
+
+    // ✅ Hapus permanen (optional, kalau kamu mau tambah)
+    public function forceDelete($id)
+    {
+        $course = Course::onlyTrashed()->findOrFail($id);
+        $course->forceDelete();
+
+        return response()->json([
+            'message' => 'Course permanently deleted.'
+        ]);
     }
 }

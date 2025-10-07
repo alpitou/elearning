@@ -40,4 +40,44 @@ class AssignmentController extends Controller
 
         return response()->json(['message' => 'Tugas berhasil dibuat', 'assignment' => $assignment], 201);
     }
+
+    public function destroy($id)
+    {
+        $assignment = Assignment::findOrFail($id);
+        $assignment->delete();
+
+        return response()->json([
+            'message' => 'Assignment moved to trash (soft deleted).'
+        ]);
+    }
+
+    public function trash()
+    {
+        $trashed = Assignment::onlyTrashed()
+            ->with('course:id,name')
+            ->get();
+
+        return response()->json($trashed);
+    }
+
+    public function restore($id)
+    {
+        $assignment = Assignment::onlyTrashed()->findOrFail($id);
+        $assignment->restore();
+
+        return response()->json([
+            'message' => 'Assignment restored successfully.',
+            'data' => $assignment
+        ]);
+    }
+
+    public function forceDelete($id)
+    {
+        $assignment = Assignment::onlyTrashed()->findOrFail($id);
+        $assignment->forceDelete();
+
+        return response()->json([
+            'message' => 'Assignment permanently deleted.'
+        ]);
+    }
 }

@@ -36,15 +36,47 @@ class DiscussionController extends Controller
         return response()->json(['message' => 'Diskusi berhasil dibuat', 'discussion' => $discussion], 201);
     }
 
-    public function destroy(Request $request, $id)
+public function destroy($id)
     {
         $discussion = Discussion::findOrFail($id);
-
+        $discussion->delete();
+        
         if ($request->user()->id !== $discussion->user_id && $request->user()->role !== 'dosen') {
             return response()->json(['message' => 'Tidak diizinkan'], 403);
         }
 
-        $discussion->delete();
-        return response()->json(['message' => 'Diskusi dihapus']);
+        return response()->json([
+            'message' => 'Discussion moved to trash (soft deleted).'
+        ]);
+    }
+
+    public function trash()
+    {
+        $trashed = Discussion::onlyTrashed()
+            ->with(['course:id,name', 'user:id,name'])
+            ->get();
+
+        return response()->json($trashed);
+    }
+
+    public function restore($id)
+    {
+        $discussion = Discussion::onlyTrashed()->findOrFail($id);
+        $discussion->restore();
+
+        return response()->json([
+            'message' => 'Discussion restored successfully.',
+            'data' => $discussion
+        ]);
+    }
+
+    public function forceDelete($id)
+    {
+        $discussion = Discussion::onlyTrashed()->findOrFail($id);
+        $discussion->forceDelete();
+
+        return response()->json([
+            'message' => 'Discussion permanently deleted.'
+        ]);
     }
 }

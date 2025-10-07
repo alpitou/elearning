@@ -31,9 +31,9 @@ class SubmissionController extends Controller
         return response()->json(['message' => 'Tugas berhasil dikumpulkan', 'submission' => $submission], 201);
     }
 
-    public function grade(Request $request, $id)
+    public function score(Request $request, $id)
     {
-        $request->validate(['grade' => 'required|integer|min:0|max:100']);
+        $request->validate(['score' => 'required|integer|min:0|max:100']);
 
         $submission = Submission::findOrFail($id);
 
@@ -41,7 +41,7 @@ class SubmissionController extends Controller
             return response()->json(['message' => 'Hanya dosen yang dapat memberi nilai'], 403);
         }
 
-        $submission->update(['grade' => $request->grade]);
+        $submission->update(['score' => $request->score]);
 
         return response()->json(['message' => 'Nilai berhasil diberikan', 'submission' => $submission]);
     }
