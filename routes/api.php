@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\MaterialController;
+use App\Http\Controllers\Api\DiscussionController;
+use App\Http\Controllers\Api\ReplyController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -32,4 +34,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/courses/{courseId}/materials', [MaterialController::class, 'index']);
     Route::post('/materials', [MaterialController::class, 'store']);
     Route::get('/materials/{id}/download', [MaterialController::class, 'download']);
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    // DISCUSSION ROUTES
+    Route::get('/courses/{courseId}/discussions', [DiscussionController::class, 'index']);
+    Route::post('/discussions', [DiscussionController::class, 'store']);
+    Route::delete('/discussions/{id}', [DiscussionController::class, 'destroy']);
+
+    // REPLY ROUTES
+    Route::get('/discussions/{discussionId}/replies', [ReplyController::class, 'index']);
+    Route::post('/replies', [ReplyController::class, 'store']);
 });
