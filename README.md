@@ -86,8 +86,8 @@ Gunakan akun dosen untuk menambahkan course dan materi.<br>
 Gunakan akun mahasiswa untuk mendaftar, mengerjakan tugas, dan berdiskusi.<br>
 
 Pastikan semua request API menggunakan header:<br>
-`Accept: application/json<br>`
-`Authorization: Bearer <token><br>`
+`Accept: application/json`<br>
+`Authorization: Bearer <token>`<br>
 
 ## Teknologi yang Digunakan
 - Laravel 10<br>
