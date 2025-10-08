@@ -24,27 +24,27 @@ The system supports token-based authentication via Sanctum and implements soft d
 
 ## Installation Guide
 ### 1. Clone repository
-   'git clone https://github.com/alpitou/elearning.git'
+   `git clone https://github.com/alpitou/elearning.git`
 
 ### 2. Instal dependencies
-   'composer install'
+   `composer install`
 
 ### 3. File environment
-   'cp .env.example .env'
+   `p .env.example .env`
 
 ### 4. Generate key
-   'php artisan key:generate'
+   `php artisan key:generate`
 
 ### 5. Setup database
-   'DB_DATABASE=elearning_db
+   `DB_DATABASE=elearning_db
    DB_USERNAME=root
-   DB_PASSWORD='
+   DB_PASSWORD=`
 
 ### 6. Run migration
-   'php artisan migrate --seed'
+   `php artisan migrate --seed`
 
 ### 7. Run server
-   'php artisan serve'
+   `php artisan serve`
    Access: http://127.0.0.1:8000
 
 ## Roles & Example Credentials
