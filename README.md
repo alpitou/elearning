@@ -48,18 +48,22 @@ The system supports token-based authentication via Sanctum and implements soft d
    Access: http://127.0.0.1:8000
 
 ## Roles & Example Credentials
-### Role	        Email	                   Password<br>
-Dosen	        dosen@gmail.com            password<br>
-Mahasiswa	    mahasiswa@gmail.com        password<br>
+| Role       | Email                 | Password  |
+|-------------|-----------------------|------------|
+| Dosen       | dosen@gmail.com       | password   |
+| Mahasiswa   | mahasiswa@gmail.com   | password   |
 
 ## Feature Modules
-### Modul	        Fitur Utama	                    Route Prefix<br>
-Auth	        Register, Login, Logout	        /api/auth<br>
-Course	        CRUD, Enroll, Soft Delete	    /api/courses<br>
-Material	    Upload, Download, Restore	    /api/materials<br>
-Assignment	    Create, Grade, Report	        /api/assignments<br>
-Discussion	    Diskusi & Balasan	            /api/discussions<br>
-Report	        Statistik dan Analisis	        /api/reports<br>
+
+| Modul       | Fitur Utama                     | Route Prefix      |
+|--------------|----------------------------------|-------------------|
+| Auth         | Register, Login, Logout          | /api/auth         |
+| Course       | CRUD, Enroll, Soft Delete        | /api/courses      |
+| Material     | Upload, Download, Restore        | /api/materials    |
+| Assignment   | Create, Grade, Report            | /api/assignments  |
+| Discussion   | Diskusi & Balasan                | /api/discussions  |
+| Report       | Statistik dan Analisis           | /api/reports      |
+
 
 ## Reports
 | Method | Endpoint | Deskripsi |
@@ -82,8 +86,8 @@ Gunakan akun dosen untuk menambahkan course dan materi.<br>
 Gunakan akun mahasiswa untuk mendaftar, mengerjakan tugas, dan berdiskusi.<br>
 
 Pastikan semua request API menggunakan header:<br>
-Accept: application/json<br>
-Authorization: Bearer <token><br>
+`Accept: application/json<br>`
+`Authorization: Bearer <token><br>`
 
 ## Teknologi yang Digunakan
 - Laravel 10<br>
