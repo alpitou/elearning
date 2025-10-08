@@ -62,10 +62,13 @@ Discussion	    Diskusi & Balasan	            /api/discussions<br>
 Report	        Statistik dan Analisis	        /api/reports<br>
 
 ## Reports
-### Endpoint	                    Deskripsi<br>
-GET /api/reports/courses	        Statistik jumlah mahasiswa per mata kuliah<br>
-GET /api/reports/assignments	    Statistik tugas dinilai/belum dinilai<br>
-GET /api/reports/students/{id}	    Statistik nilai & tugas mahasiswa tertentu<br>
+| Method | Endpoint | Deskripsi |
+|--------|-----------|-----------|
+| POST   | `/api/register` | Registrasi user baru |
+| POST   | `/api/login` | Login user dan mendapatkan token |
+| GET    | `/api/courses` | Menampilkan daftar semua mata kuliah |
+| POST   | `/api/courses` | Menambah mata kuliah (hanya dosen) |
+| DELETE | `/api/courses/{id}` | Menghapus mata kuliah |
 
 ## Fitur Soft Delete
 Semua entitas utama (courses, materials, assignments, discussions, replies) mendukung operasi berikut:<br>
