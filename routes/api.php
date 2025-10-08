@@ -32,6 +32,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/courses/{id}', [CourseController::class, 'update']);
     Route::delete('/courses/{id}', [CourseController::class, 'destroy']);
     Route::post('/courses/{id}/enroll', [CourseController::class, 'enroll']);
+    Route::put('/courses/{id}/restore', [CourseController::class, 'restore']);
+    Route::get('/courses/trash', [CourseController::class, 'trash']);
+    Route::put('/courses/{id}/restore', [CourseController::class, 'restore']);
+    Route::delete('/courses/{id}/force', [CourseController::class, 'forceDelete']);
 });
 
 // MATERIALS ROUTES
@@ -42,6 +46,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/materials/trash', [MaterialController::class, 'trash']);
     Route::put('/materials/{id}/restore', [MaterialController::class, 'restore']);
     Route::delete('/materials/{id}/force', [MaterialController::class, 'forceDelete']);
+    Route::get('/materials/{id}/download', [MaterialController::class, 'download']);
 });
 
 Route::middleware('auth:sanctum')->group(function () {

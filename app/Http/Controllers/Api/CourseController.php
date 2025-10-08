@@ -75,8 +75,6 @@ class CourseController extends Controller
         return response()->json(['message' => 'Berhasil mendaftar ke mata kuliah']);
     }
 
-
-    // ✅ Lihat semua course yang sudah dihapus
     public function trash()
     {
         $trashed = Course::onlyTrashed()
@@ -86,7 +84,6 @@ class CourseController extends Controller
         return response()->json($trashed);
     }
 
-    // ✅ Restore course dari trash
     public function restore($id)
     {
         $course = Course::onlyTrashed()->findOrFail($id);
@@ -98,7 +95,6 @@ class CourseController extends Controller
         ]);
     }
 
-    // ✅ Hapus permanen (optional, kalau kamu mau tambah)
     public function forceDelete($id)
     {
         $course = Course::onlyTrashed()->findOrFail($id);

@@ -31,18 +31,23 @@ class MaterialController extends Controller
             'file_path' => $filePath,
         ]);
 
-        return response()->json(['message' => 'Materi berhasil diupload', 'material' => $material], 201);
+        return response()->json([
+            'message' => 'Materi berhasil diupload',
+            'data' => $material
+        ], 201);
     }
 
     public function download($id)
     {
         $material = Material::findOrFail($id);
 
-        if (!Storage::disk('public')->exists($material->file_path)) {
-            return response()->json(['message' => 'File tidak ditemukan'], 404);
+        $filePath = storage_path('app/public/' . $material->file_path);
+
+        if (!file_exists($filePath)) {
+            return response()->json(['message' => 'File not found.'], 404);
         }
 
-        return response()->download(storage_path('app/public/' . $material->file_path));
+        return response()->download($filePath, basename($filePath));
     }
 
     public function index($courseId)
